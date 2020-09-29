@@ -17,20 +17,26 @@ namespace OnlineShopburgertwohomeWebUi.Controllers
         {
             Repository = Repo;    
         }
-        public ViewResult List(int page = 1) {
+        public ViewResult List(string category,int page = 1) {
+
+           
 
             ProductsListViewModel model = new ProductsListViewModel
-            {
-                products = Repository.Products
-                            .OrderBy(p => p.Idproduit)
-                            .Skip((page - 1) * PageSize)
-                            .Take(PageSize),
+            { 
+                 
+                Products = Repository.Products
+                                .Where(p => category == null || p.Category == category)
+                                .OrderBy(p => p.Idproduit)
+                                .Skip((page - 1) * PageSize)
+                                .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
-                              currentPage = page,
-                              ItemPerPage = PageSize,
-                              TotalItems = Repository.Products.Count(),
-                }
+                    currentPage = page,
+                    ItemPerPage = PageSize,
+                    TotalItems = Repository.Products.Count(),
+                },
+                CurrentCategory = category
+                    
             };
 
             return View(model);

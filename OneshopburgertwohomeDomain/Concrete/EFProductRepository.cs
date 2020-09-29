@@ -2,6 +2,7 @@
 using OneshopburgertwohomeDomain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -16,7 +17,15 @@ namespace OneshopburgertwohomeDomain.Concrete
         public IEnumerable<Product> Products 
         {
             get {
-                   return context.Products;
+                try
+                {
+                    return context.Products;
+                }
+                catch (DbEntityValidationException dbex)
+                {
+
+                    throw;
+                }
                 }
         }
     }

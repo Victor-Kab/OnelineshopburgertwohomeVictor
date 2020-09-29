@@ -1,0 +1,15 @@
+﻿@model OneshopburgertwohomeDomain.Entities.Product
+
+@{
+    ViewBag.Title = "ProductSummary";
+}
+
+<h2>ProductSummary</h2>
+<div class="well">
+    <h3>
+        <strong>@Model.Libelle </strong>
+        <span class="pull-right label label-primary"> @Model.Prix.ToString("c") </span>
+    </h3>
+    <span class="lead">@Model.Description</span>
+</div>
+

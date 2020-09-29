@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.UI;
 
 namespace OnlineShopburgertwohomeWebUi
 {
@@ -13,17 +14,25 @@ namespace OnlineShopburgertwohomeWebUi
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name:null,
-                url:"Page(page)",
-                defaults: new {Controller="Product", Action="List"}
-                );
+            routes.MapRoute(null, "",
+                     new
+                     {
+                         Controller = "Product",
+                         action = "List",
+                         category = (string)null,
+                         page = 1
+                     });
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Product", action = "List", id = UrlParameter.Optional }
-            );
+            routes.MapRoute(null, "Page{ page}",
+                new
+                {
+                    Controller = "Product",
+                    action = "List",
+                    category = (string)null
+                },
+                new { page = @"\d+" });
+            routes.MapRoute(null, "{controller}/{action}");
+             
         }
     }
 }
