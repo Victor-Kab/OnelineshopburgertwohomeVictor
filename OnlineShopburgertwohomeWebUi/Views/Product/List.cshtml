@@ -1,0 +1,19 @@
+﻿@model OnlineShopburgertwohomeWebUi.Models.ProductsListViewModel
+                        .
+
+@{
+    ViewBag.Title = "Products";
+}
+
+@foreach (var p in Model.Products)
+{
+    <div>
+        <strong>@p.Libelle </strong>
+        <span class="pull-right label label-primary"> @p.Prix.ToString("c") </span>
+        <span class="lead">@p.Description</span>
+    </div>
+    <div>
+        @Html.PageLinks(Model.PagingInfo, x=>Url.Action("List", new { Page=x}))
+    </div>
+}
+
